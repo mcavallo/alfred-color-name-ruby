@@ -1,4 +1,4 @@
-# Alfred Color Name Workflow (Ruby)
+# Alfred Workflow: Color Name (Ruby)
 
 Based on [Name that Color](http://chir.ag/projects/name-that-color/). Built as an Alfred workflow for convenience with some tweaks to fit my personal needs.
 
