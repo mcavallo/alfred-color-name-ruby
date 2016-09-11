@@ -4,6 +4,8 @@ Based on [Name that Color](http://chir.ag/projects/name-that-color/). Built as a
 
 ![](https://raw.githubusercontent.com/mcavallo/alfred-color-name-ruby/master/assets/screenshot_001.png)
 
+![](https://raw.githubusercontent.com/mcavallo/alfred-color-name-ruby/master/assets/screenshot_002.png)
+
 
 ## Choose what to copy
 
@@ -20,7 +22,7 @@ None | SASS variable name | `$color-dove-gray`
 ## Requirements
 
 - Alfred 3
-- Modern version of Ruby (2.0+)
+- Modern version of Ruby 2.0+ (OS X 10.10 ships with 2.0)
 
 
 ## Credits
