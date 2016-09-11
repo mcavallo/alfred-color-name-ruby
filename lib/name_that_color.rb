@@ -2,5 +2,4 @@
 # frozen_string_literal: true
 
 require 'name_that_color/base'
-require 'name_that_color/color'
-require 'name_that_color/color_query'
+require 'name_that_color/color_search'

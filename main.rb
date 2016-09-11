@@ -15,7 +15,8 @@ logger.level = Logger::DEBUG
 logger.datetime_format = ''
 
 workflow = AlfredWorkflow.new
-color = NameThatColor::ColorQuery.new(ARGV.first, logger)
+search = NameThatColor::ColorSearch.new(logger)
+color = search.find(ARGV.first)
 
 unless color.valid?
   workflow.send_result(
@@ -43,43 +44,43 @@ icon = Icon.new
 icon_file = icon.create!(
   '/tmp/alfred-color-name',
   color.queried_hex,
-  color.match.hex
+  color.hex
 )
 
 workflow.send_result(
-  arg: color.match.sass_variable,
-  title: format(title_fmt, color.match.name, color.match.hex),
+  arg: color.sass_variable,
+  title: format(title_fmt, color.name, color.hex),
   subtitle: format(
     subtitle_fmt,
     color.match_type,
-    color.match.sass_variable
+    color.sass_variable
   ),
   icon: {
     path: icon_file.path
   },
   mods: {
     alt: {
-      arg: color.match.hex,
+      arg: color.hex,
       subtitle: format(
         subtitle_fmt,
         color.match_type,
-        color.match.hex
+        color.hex
       )
     },
     cmd: {
-      arg: color.match.rgb,
+      arg: color.rgb,
       subtitle: format(
         subtitle_fmt,
         color.match_type,
-        color.match.rgb
+        color.rgb
       )
     },
     ctrl: {
-      arg: color.match.sass_definition,
+      arg: color.sass_definition,
       subtitle: format(
         subtitle_fmt,
         color.match_type,
-        color.match.sass_definition
+        color.sass_definition
       )
     }
   }

@@ -2,6 +2,10 @@
 # frozen_string_literal: true
 
 module ColorUtils
+  def self.color_row(color, name)
+    [color, name].concat(color_components(color))
+  end
+
   def self.color_components(color)
     result = rgb_8bit_components(color)
     result.concat(hsl_components(color))
