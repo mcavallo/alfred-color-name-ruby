@@ -16,6 +16,7 @@ logger.datetime_format = ''
 
 workflow = AlfredWorkflow.new
 search = NameThatColor::ColorSearch.new(logger)
+search.load_colors(File.join(BASE_PATH, 'assets/colors.yml'))
 color = search.find(ARGV.first)
 
 unless color.valid?

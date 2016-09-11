@@ -9,6 +9,7 @@ require 'benchmark'
 require 'name_that_color'
 
 search = NameThatColor::ColorSearch.new
+search.load_colors(File.join(BASE_PATH, 'assets/colors.yml'))
 
 Benchmark.bmbm do |bm|
   bm.report do

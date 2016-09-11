@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'color_utils'
+require 'yaml'
 require 'name_that_color/invalid_match'
 require 'name_that_color/valid_match'
 
@@ -9,6 +10,10 @@ module NameThatColor
   class ColorSearch
     def initialize(logger = nil)
       @logger = logger
+    end
+
+    def load_colors(colors)
+      @colors = colors.is_a?(Array) ? colors : YAML.load_file(colors)
     end
 
     def find(hex_query)
@@ -20,19 +25,19 @@ module NameThatColor
     private
 
     def validate_query(hex_query)
-      return false unless hex_query =~ /^#?([a-f0-9]{6}|[a-f0-9]{3})\b$/i
+      return false unless hex_query =~ /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i
       format_query(hex_query)
     end
 
     def format_query(hex_query)
-      hex_query = hex_query.gsub(/^#/, '').upcase
-      hex_query.chars.map! { |c| c.to_s * 2 }.join if hex_query.length == 3
+      clean_hex = hex_query.gsub(/^#/, '').upcase
+      clean_hex.length == 3 ? clean_hex.chars.map { |c| c.to_s * 2 }.join : clean_hex
     end
 
     def perform_search(query)
-      exact_match = find_exact_match(COLORS, query)
+      exact_match = find_exact_match(@colors, query)
       return ValidMatch.new(query, exact_match, is_exact: true) if exact_match
-      ValidMatch.new(query, find_closest_match(COLORS, query), is_exact: false)
+      ValidMatch.new(query, find_closest_match(@colors, query), is_exact: false)
     end
 
     def find_exact_match(list, query)
